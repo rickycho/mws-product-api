@@ -1,23 +1,23 @@
 <?php namespace RaffW\MwsProductApi;
 
-/*******************************************************************************
- * Copyright 2009-2014 Amazon Services. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- *
- * You may not use this file except in compliance with the License.
- * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
- *******************************************************************************
- * PHP Version 5
- *
- * @category Amazon
- * @package  Marketplace Web Service Products
- * @version  2011-10-01
- *           Library Version: 2014-10-20
- *           Generated: Fri Oct 17 17:59:56 GMT 2014
- */
+    /*******************************************************************************
+     * Copyright 2009-2014 Amazon Services. All Rights Reserved.
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     *
+     * You may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at: http://aws.amazon.com/apache2.0
+     * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+     * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+     * specific language governing permissions and limitations under the License.
+     *******************************************************************************
+     * PHP Version 5
+     *
+     * @category Amazon
+     * @package  Marketplace Web Service Products
+     * @version  2011-10-01
+     *           Library Version: 2014-10-20
+     *           Generated: Fri Oct 17 17:59:56 GMT 2014
+     */
 
 /**
  * MarketplaceWebServiceProducts_Model - base class for all model classes
@@ -149,7 +149,12 @@ abstract class MwsProductsModel {
      */
     private function _isComplexType($fieldType)
     {
-        return preg_match("/^MarketplaceWebServiceProducts_/", $fieldType);
+        if(class_exists('\\RaffW\\MwsProductApi\\Model\\'.$fieldType)){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
     /**
@@ -230,7 +235,8 @@ abstract class MwsProductsModel {
                         // DIRECTORY_SEPARATOR . str_replace('_', DIRECTORY_SEPARATOR, $fieldType[0]) . ".php");
                         foreach ($elements as $element)
                         {
-                            $this->_fields[$fieldName]['FieldValue'][] = new $fieldType[0]($element);
+                            $name ='\\RaffW\\MwsProductApi\\Model\\'.$fieldType[0];
+                            $this->_fields[$fieldName]['FieldValue'][] = new $name($element);
                         }
                     }
                 }
@@ -264,6 +270,7 @@ abstract class MwsProductsModel {
                     {
                         // require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR .
                         // str_replace('_', DIRECTORY_SEPARATOR, $fieldType) . ".php");
+                        $fieldType ='\\RaffW\\MwsProductApi\\Model\\'.$fieldType;
                         $this->_fields[$fieldName]['FieldValue'] = new $fieldType($elements->item(0));
                     }
                 }
